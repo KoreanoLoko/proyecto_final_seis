@@ -54,7 +54,7 @@ class Conexion{
 
 En esta hoja lo que hacemos es requerir los datos de config.php, y luego creamos una clase llamada Conexion, la cual tiene un atributo el cual es $conexion_db y con una funcion constructora la cual nos ayuda a conectarnos a la base de datos, con los parametros anteriormente mencionados (DB_HOST, DB_USER, DB_PASS, DB_NAME), despues hacemos una validacion con un if que si es verdadera la conexion a fallado y nos arrojara el error y ese valor retornara.
 
-07.-Pagina "php/login.php"
+07.-Pagina "php/login.php" "php/validar.php" "php/registrar.php"
 
 <!DOCTYPE html>
 <html lang="en">
