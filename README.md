@@ -37,6 +37,9 @@ En esta pagina lo que hacemos es que si el usuario no tiene una cuenta asociada 
 
 10.-Pagina "clases/insertarRegistro.php"
 
-Lo que hacemos en esta pagina es incluir nuestra base de datos, y asi poder crear nuestra clase Registro() que sera una sub clase de nuestra clase padre Conexion() esta clase obtendra los campos que fueron enviamos de la pagina registro.php, para asi recepcionarlos y por el metodo __construct() poder trabajarlos, a continuacion creamos una funcion dentro de nuestra clase Registro la cual se llamara insertarRegistro() y que recibira los atributos que previamente capturamos y podra mediante la instanciacion de la clase Conexion poder realizar la consulta para insertar los datos que el usuario nos proporciono mediante el formulario ingresarlos a la tabla usuario y asi poder crearle una cuenta, luego que esta consulta sea verdadera nos volvera al login o en su defecto nos mostrara un error
+Lo que hacemos en esta pagina es incluir nuestra base de datos, y asi poder crear nuestra clase Registro() que sera una sub clase de nuestra clase padre Conexion() esta clase obtendra los campos que fueron enviamos de la pagina registro.php, para asi recepcionarlos y por el metodo __construct() poder trabajarlos, a continuacion creamos una funcion dentro de nuestra clase Registro la cual se llamara insertarRegistro() y que recibira los atributos que previamente capturamos y podra mediante la instanciacion de la clase Conexion poder realizar la consulta para insertar los datos que el usuario nos proporciono mediante el formulario ingresarlos a la tabla usuario y asi poder crearle una cuenta, luego que esta consulta sea verdadera nos volvera al login o en su defecto nos mostrara un error, luego afuera de la clase recepcionamos e instanciamos la clase Registro() y llamamos a la funcion y le pasamos los parametros.
 
+11.- Pagina "landing/landing.php"
+
+En esta pagina lo que hacemos es mostrarle al usuario las diferentes opciones que el tiene como por ejemplo tiene la opcion dar de baja su cuenta, cerrar sesion y realizar las preguntas para ver su juego, para entrar mas a las entrañas de la pagina el botton 
 
