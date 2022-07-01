@@ -41,24 +41,10 @@ class Registro extends Conexion{
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conexion->conexion_db);
         }
-        // $resultado=mysqli_query($sql,$conexion);
-        // if($resultado){
-        //     header("location: login.php");
-        // }else{
-        //     echo "Error al registrarse";
-        // }
+        
     }
 
-    function eliminarRegistro($run){
-        $this->run=$run;
-        $conexion = new Conexion();
-        $sql = sprintf("DELETE FROM usuario WHERE run='$run'");
-        if (mysqli_query($conexion->conexion_db, $sql)) {
-            header("location: ../php/login.php");
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conexion->conexion_db);
-        }
-    }
+    
 }
 
 $run=$_POST['run'];
