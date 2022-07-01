@@ -39,7 +39,23 @@ En esta pagina lo que hacemos es que si el usuario no tiene una cuenta asociada 
 
 Lo que hacemos en esta pagina es incluir nuestra base de datos, y asi poder crear nuestra clase Registro() que sera una sub clase de nuestra clase padre Conexion() esta clase obtendra los campos que fueron enviamos de la pagina registro.php, para asi recepcionarlos y por el metodo __construct() poder trabajarlos, a continuacion creamos una funcion dentro de nuestra clase Registro la cual se llamara insertarRegistro() y que recibira los atributos que previamente capturamos y podra mediante la instanciacion de la clase Conexion poder realizar la consulta para insertar los datos que el usuario nos proporciono mediante el formulario ingresarlos a la tabla usuario y asi poder crearle una cuenta, luego que esta consulta sea verdadera nos volvera al login o en su defecto nos mostrara un error, luego afuera de la clase recepcionamos e instanciamos la clase Registro() y llamamos a la funcion y le pasamos los parametros.
 
-11.- Pagina "landing/landing.php"
+11.-Pagina "landing/landing.php"
 
-En esta pagina lo que hacemos es mostrarle al usuario las diferentes opciones que el tiene como por ejemplo tiene la opcion dar de baja su cuenta, cerrar sesion y realizar las preguntas para ver su juego, para entrar mas a las entrañas de la pagina el botton 
+En esta pagina lo que hacemos es mostrarle al usuario las diferentes opciones que el tiene como por ejemplo tiene la opcion dar de baja su cuenta, cerrar sesion y realizar las preguntas para ver su juego, para entrar mas a las entrañas de la pagina el botton Preguntas nos lleva a la pagina formulario.php, el botton Cerrar sesion nos llevara de nuevo al login.php y el botton para dar de baja nuestra cuenta nos enviara a validacionEliminar.php y mencionar que en esta hoja tambien implementamos Boostrap y nuestra hoja de estilo de css.
+  
+12.-Pagina "preguntas/formulario.php"
+  
+En esta hoja lo que hacemos es presentarle un formulario a nuestro usuario el cual dependiendo de lo que escoga le va a mostrar un juego, mencionar que esta hoja es basicamente con html:5, y lo que ocupamos mas fueron etiquetas <select> y a todas esas opciones le otorgamos un valor y luego esos valores se los enviamos mediante _POST a nuesta hoja verJuego.php y asi poder mostrar el juego, tambien cabe mencionar que igual incluimos Boostrap a esta pagina y nuestra hoja de css.
+  
+13.-Pagina "juego/verJuego.php"
+ 
+En esta pagina lo que hacemos es mediante enveber codigo PHP con HTML:5 lo gramos hacer la suma de las variables que mandamos aca mediante metodo _POST de nuestro formulario.php y asi hacer nuestra respectiva conexion y nuestra consulta, y por medio de los metodos mysqli_query y msqli_fetch_assoc podemos mostrar el resultado que eso es el juego, y por ultimo cerrar la conexion, cabe mencionar que aparte de mostrarle el juego con PHP con html logramos tambien colocar un botton el cual le ayuda a volver al landing y hacer de nuevo el formulario, ademas que ocupamos tambien Boostrap y nuestra hoja de css..
+  
+14.-Pagina "preguntas/validacionEliminar.php"
+  
+En esta pagina lo que hacemos es despues de querar de dar de baja la cuenta preguntarle al usuario que si de verdad quiere dar de baja su cuenta, y para eso el tiene que confirmar con su run, y ese run mediante un formulario y un metodo _POST lo enviamos a la pagina eliminarUsuario.php, tambien mencionar que igual le otorgamos al usuario otro botton el cual le servira por si se arrepintio y asi poder volver al landing, decir tambien que agregamos Boostrap y nuesta hoja de estilo css.
+  
+15.-Pagina "clases/eliminarUsuario"
+  
+Lo que hacemos en esta pagina es incluir obviamente nuestra base de datos para poder lograr la conexion exitosa, empezamos creando la clase eliminarUsuario que es una sub clase de la clase padre Conexion() la cual le pasamos la variable anteriormente colocada por el usuario para poder eliminar su cuenta, o sea su run practicamente, hacemos nuestro metodo constructor y creamos nuestra funcion para eliminar el usuario respectivamente, a esta funcion le pasamos el parametro, y luego pasamos a instanciar la clase Conexion() la consulta correspondiente, y lo que queremos decir con esta consulta es que si el run que le pasamos es igual al que esta dentro de nuestra tabla usuario me lo eliminas y si esta consulta esta en lo correcto me mandara al login.php y en esta punto el usuario ya no podra entrar con la cuenta que tenia anteriormente, y si la consulta esta mala nos mostrara un error, afuera de la clase recepcionamos el valor, instanciamos la clase eliminarUsuario() y tambien llamamos a la funcion eliminarRegistro() y dentro el parametro $run.
 
