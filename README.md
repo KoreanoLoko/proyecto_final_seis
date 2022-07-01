@@ -34,7 +34,7 @@ Indice:
     create trigger eliminar_usuario after delete on usuario
     for each row
     begin 
-      insert into usuario_eliminados (run, nombre, apellido, telefono, direccion, fecha, hora)
+      insert into usuario_eliminado (run, nombre, apellido, telefono, direccion, fecha, hora)
         values (old.run, old.nombre, old.apellido, old.telefono, old.direccion, curdate(), curtime());
     end//
     delimiter ;
