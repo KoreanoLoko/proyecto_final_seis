@@ -19,7 +19,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <form action="../juego/lol.php" method="POST">
+                    <form action="../juego/verJuego.php" method="POST">
                         <legend>Responde la pregunta</legend>
                         <div class="row">
                             <div class="col-md-12">
