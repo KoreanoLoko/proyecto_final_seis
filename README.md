@@ -17,110 +17,26 @@ Indice:
 
 05.-Pagina "confing.php"
 
-<?php
-
-    define("DB_HOST", "localhost:3306");
-    define("DB_USER", "root");
-    define("DB_PASS", "");
-    define("DB_NAME", "opcion6");
-    define("DB_CHARSET", "utf8");
-
-?>
-
 En esta hoja lo que hacemos es definir como seran los parametros los cuales se reguira la conexion a la base de datos, ya que DB_HOST = "localhost:3306", DB_USER = "root", DB_PASS = "", DB_NAME = "opcion6" y DB_CHARSET = "utf8", entonces con estos datos podremos conectarnos.
 
 06.-Pagina "db.php"
 
-<?php
-
-require_once("config.php");
-
-class Conexion{
-
-    public $conexion_db;
-
-    public function __construct(){
-        $this->conexion_db=mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-        if ($this->conexion_db->connect_errno) 
-            {
-                echo "Fallo al conectar a MySQL: " . $this->conexion_db->connect_error;
-                return;
-            }
-    }
-    
-}
-
-?>
-
 En esta hoja lo que hacemos es requerir los datos de config.php, y luego creamos una clase llamada Conexion, la cual tiene un atributo el cual es $conexion_db y con una funcion constructora la cual nos ayuda a conectarnos a la base de datos, con los parametros anteriormente mencionados (DB_HOST, DB_USER, DB_PASS, DB_NAME), despues hacemos una validacion con un if que si es verdadera la conexion a fallado y nos arrojara el error y ese valor retornara.
 
-07.-Pagina "php/login.php" "php/validar.php" "php/registrar.php"
+07.-Pagina "php/login.php"
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <!-- <style>
-        body{
-            background:url('../cft.png')
-            background-size: 100%;
-        }
-    </style> -->
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <br>
-            </div>
-            <!-- Login -->
-            <div class="col-md-12">
-                <h1 style="margin: 0px 0px 10px 580px">Login</h1>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <!--Parte izquierda -->
-                </div>
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="validar.php" method="POST">
-                                <div style="text-align: center;" class="col-md-12">
-                                    <div class="col-md-12">    
-                                        <h6>Nombre</h6>
-                                        <input type="text" class="form-control" placeholder="Nombre" name="nombre">
-                                    </div>
-                                    <div>
-                                        <br>
-                                    </div>
-                                    <div class="col-md-12">    
-                                        <h6>Contraseña</h6>
-                                        <input type="password" class="form-control" placeholder="Constraseña" name="constrasena">
-                                    </div>
-                                </div>
-                                <div>
-                                    <br>
-                                </div>
-                                <div style="text-align: center;">
-                                <button class="btn btn-success">Ingresar</button> <button class="btn btn-info" formaction="registro.php">Crear cuenta</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <!--Parte derecha -->
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+Abrimos las etiquetas html:5, las cuales dentro de estas posicionamos nuestro login para que el usuario pueda ingresar, tambien agregamos Boostrap para nuestro diseño de la pagina del login, en este apartado tenemos unas etiquetas <form> las cuales nos sirven para mandar dos etiquetas <input> que llevaran la informacion ingresada por el usuario y asi poder validarla en la otra hoja "validar.php", tambien mencionar que esta hoja incluimos nuestra hoja de css para añadirle estilo a la pagina Web.
 
-Lo que hacemos en esta hora es abrir etiquetas html:5 en las cuales colocaremos como titulo de la pagina sera "Login"
-luego linqeamos el link de Bostrap y tambien linqeamos el link de estilos que se arroja en la carpeta "css", luego dentro del "body" creamos nuestro formulario para registrar a nuestro usuarios que seria rut, nombre, apellido, telefono, direccion, contrasena, politicas. y estos datos van dirijido por metodo "POST" y en el action require del archivo "insetarRegistro.php" y luego al registrar estos datos se van  a la base de datos y luego de ser isertado se cumple una funcion para que se redireccione la pagina login para asi registrar el nombre y la contraseña del usuario para que nos redireccione a la pagina "landing" solo si el usuario y la contraseña es correcta. 
+08.-Pagina "php/validar.php"
+
+En esta hoja lo que hacemos es recepcionar en las variables $nombre y $constrasena las etiquetas <input> que nuestro usuario nos mando, y asi con el metodo se PHP session_start() podemos validar esta sesion, acontinuacion le decimos a la variable $_SESSION['nombre'] = $nombre y asi decirle que iniciara session con el nombre, despues de eso incluimos nuestra hoja de la base de dato, despues instanciamos la clase Conexion() y hacemos la consulta respectiva de que si en nuestra tabla usuario esta el nombre y la constrasena que anteriormente recepcionamos, y con el metodo mysqli_query() hacemos la consulta y ese metodo recibe dos parametros que son la conexion y la consulta, y esa consulta se guarda en la variable $resultado y esa variable la recorremos con el metodo mysqli_num_rows y eso lo guardamos en la variable $filas y decimos que si el resultado de la variable $fila es verdadero me mandaras por medio de header a landing de nuestra pagina, pero si lo que entrega es falso le mostramos una alerta y lo devolvemos al login, ocupamos el metodo myqli_free_result() para liberar el resultado y terminamos cerrando la conexion.
+
+09.-Pagina "php/registro.php"
+
+En esta pagina lo que hacemos es que si el usuario no tiene una cuenta asociada a nuestra base de datos, es crearle una mediante un formulario en html:5 y que este formulario tiene todos los datos que nosotros necesitamos para ingresarlos en nuestra tabla usuario, osea todos sus atributos, ademas mencionar que en estos campos registrar sus datos es obligatorio ya que ocupamos un required un atributo el cual nos permite que el usuario tenga que llenar el campo si o si y para finalizar debe aprimir el boton mandara toda la informacion del formulario a la pagina insertarRegistro.php y ya en esa hoja trabajarla.
+
+10.-Pagina "clases/insertarRegistro.php"
+
+Lo que hacemos en esta pagina es incluir nuestra base de datos, y asi poder crear nuestra clase Registro() que sera una sub clase de nuestra clase padre Conexion() esta clase obtendra los campos que fueron enviamos de la pagina registro.php, para asi recepcionarlos y por el metodo __construct() poder trabajarlos, a continuacion creamos una funcion dentro de nuestra clase Registro la cual se llamara insertarRegistro() y que recibira los atributos que previamente capturamos y podra mediante la instanciacion de la clase Conexion poder realizar la consulta para insertar los datos que el usuario nos proporciono mediante el formulario ingresarlos a la tabla usuario y asi poder crearle una cuenta, luego que esta consulta sea verdadera nos volvera al login o en su defecto nos mostrara un error
+
+
