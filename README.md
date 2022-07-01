@@ -6,6 +6,23 @@ Documentacion
 
 Indice:
 
+- 01.- Consultas ocupadas dentro del sistema
+- 02.- Elaboracion de M.E.R para el proyecto
+- 03.- Elaboracion del Modelo Logico para el proyecto
+- 04.- Inserción de datos a la tabla juegos
+- 05.- Creacion de los triggers o disparadores
+- 06.- Pagina "confing.php"
+- 07.- Pagina "db.php"
+- 08.- Pagina "php/login.php"
+- 09.- Pagina "php/validar.php"
+- 10.- Pagina "php/registro.php"
+- 11.- Pagina "clases/insertarRegistro.php"
+- 12.- Pagina "landing/landing.php"
+- 13.- Pagina "preguntas/formulario.php"
+- 14.- Pagina "juego/verJuego.php"
+- 15.- Pagina "preguntas/validacionEliminar.php"
+- 16.- Pagina "clases/eliminarUsuario"
+
 01.- Consultas ocupadas dentro del sistema:
   - $sql = "DELETE FROM usuario WHERE run = '$this->run'";
   - $sql = sprintf("INSERT INTO usuario(run, nombre, apellido, telefono, direccion, constrasena, politica)
@@ -13,6 +30,22 @@ Indice:
   - $consulta = "SELECT juegos_resultado FROM juegos
                             WHERE score_final=$totalScore";
   - $consulta = "SELECT * FROM usuario WHERE nombre = '$nombre' AND constrasena = '$constrasena'";
+  - delimiter //
+    create trigger eliminar_usuario after delete on usuario
+    for each row
+    begin 
+      insert into usuario_eliminados (run, nombre, apellido, telefono, direccion, fecha, hora)
+        values (old.run, old.nombre, old.apellido, old.telefono, old.direccion, curdate(), curtime());
+    end//
+    delimiter ;
+  - delimiter //
+    create trigger insertar_usuario before insert on usuario
+    for each row
+    begin 
+      insert into historico_usuario (run, nombre, apellido, telefono, direccion, fecha, hora)
+        values (new.run, new.nombre, new.apellido, new.telefono, new.direccion, curdate(), curtime());
+    end//
+    delimiter ;
 
 02.-Elaboracion de M.E.R para el proyecto, el cual que consta con dos tablas, las cuales son usuario y juegos, y estas constan con atributos propios de cada tabla, los mencionaremos a continuacion: la tabla usuario tiene como atributos a run como clave primaria, tiene a telefono, tiene a nombre, tiene a apellido, tiene a direccion, tiene a constrasena y finalmente tiene el atributo politica, la tabla juegos tiene como clave primaria el id, tambien tiene como atributo a juegos_resultado y a score final. Y entre estas dos tablas hay una relacion la cual es "pueden" ya que varios usuarios puedes tener varios juegos, y a resultado de esto tenemos como cardinalidad final una relacion N:N.
 
